@@ -3,6 +3,8 @@
 include_directories(include)
 
 aux_source_directory(./src DRAW_LIST)
+
+Message(${DRAW_LIST} ===dasdlsadjsalkdj)
 add_library(libOverDraw  SHARED ${DRAW_LIST})
 
 find_library(log-lib log )

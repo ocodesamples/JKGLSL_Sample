@@ -4,7 +4,7 @@
 
 #include <jni.h>
 #include <android/log.h>
-#include "GLView.h"
+#include "GLPrimitiveView.h"
 
 
 GLView * mView;
@@ -14,7 +14,7 @@ JNICALL
 Java_com_seegl_ui_GLNativeRenderer_onSurfaceCreated(
         JNIEnv *env,
         jobject /* this */) {
-    mView = new GLView();
+    mView = new GLPrimitiveView();
     mView->onCreate();
 }
 
@@ -32,5 +32,5 @@ JNICALL
 Java_com_seegl_ui_GLNativeRenderer_onDrawFrame(
         JNIEnv *env,
         jobject obj) {
-    mView->onDraw();
+    mView->onDrawFrame();
 }

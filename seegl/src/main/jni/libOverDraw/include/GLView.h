@@ -38,14 +38,17 @@ using namespace std;
 class GLView {
 
 public:
-    GLView();
     void onCreate();
     void onLayout(bool isChanger, float x, float y , float width, float height);
 
-    void onDraw();
+    void onDrawFrame();
 
 protected:
-    int loadShader(int type, const GLchar const * shaderCode);
+    int loadShader(int type, const GLchar * shaderCode);
+    int assembProgram(int vertexShader, int fragmentShader);
+    virtual void init(){};
+    virtual void onChangerSize(bool isChanger, float x, float y, float width, float height){};
+    virtual void onDraw(){};
     void checkError();
 
 };
