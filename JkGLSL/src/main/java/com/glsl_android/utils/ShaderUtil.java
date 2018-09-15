@@ -44,7 +44,7 @@ public class ShaderUtil {
         if(program != 0) {
             GLES30.glAttachShader(program, vertexShader);
             checkGlError("glAttachShader");
-            GLES30.glAttachShader(program, vertexShader);
+            GLES30.glAttachShader(program, fragmentShader);
             checkGlError("glAttachShader");
 
             GLES30.glLinkProgram(program);
