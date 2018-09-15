@@ -4,19 +4,11 @@
 
 #include "GLPrimitiveView.h"
 
-
 void GLPrimitiveView::init() {
-   EGLDisplay  display = eglGetCurrentDisplay();
-    EGLSurface  surface = eglGetCurrentSurface(EGL_READ);
-
-
-    int width;
-    int height;
-
-    eglQuerySurface(display, surface, EGL_WIDTH, &width);
-    eglQuerySurface(display, surface, EGL_HEIGHT, &height);
-
-    ALOGE("width: %d,  height: %d", width, height);
+  int vertexShader =  loadShader(GL_VERTEX_SHADER, mVertexShader);
+  int fragmentShader = loadShader(GL_FRAGMENT_SHADER, mFragmentShader);
+  mUserProgram = assembProgram(vertexShader, fragmentShader);
+    ALOGE("mUserProgram: %d", mUserProgram);
 }
 
 void GLPrimitiveView::onChangerSize(bool isChanger, float x, float y, float width, float height) {

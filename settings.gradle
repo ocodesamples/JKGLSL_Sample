@@ -1,1 +1,1 @@
-include ':JkGLSL', ':glslutil', ':seegl'
+include ':JkGLSL', ':seegl'

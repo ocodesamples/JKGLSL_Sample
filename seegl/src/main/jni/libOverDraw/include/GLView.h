@@ -44,6 +44,7 @@ public:
     void onDrawFrame();
 
 protected:
+    int mUserProgram = -1;
     int loadShader(int type, const GLchar * shaderCode);
     int assembProgram(int vertexShader, int fragmentShader);
     virtual void init(){};
