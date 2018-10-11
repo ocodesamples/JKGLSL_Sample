@@ -26,12 +26,13 @@ public class TriangleView extends GLSurfaceView {
 
     public TriangleView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setEGLContextClientVersion(3);//设置版本
+        setEGLContextClientVersion(3);
         mRenderer = new SceneRenderer();
         setRenderer(mRenderer);
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
 
     }
+
 
 
     private class SceneRenderer implements GLSurfaceView.Renderer {
@@ -107,7 +108,7 @@ public class TriangleView extends GLSurfaceView {
         private void initVertexData() {  //初始化顶点数据的方法
             //顶点坐标数据的初始化
             vCount = 3;
-            final float UNIT_SIZE = 0.2f;
+            final float UNIT_SIZE = 0.5f;
             float vertices[] = new float[] {  //顶点坐标数组
                     -4 * UNIT_SIZE,              0,   0,
                      0            , -4 * UNIT_SIZE,   0,
@@ -143,7 +144,7 @@ public class TriangleView extends GLSurfaceView {
                     "uniform mat4 uMVPMatrix;     \n" +
                     "layout(location = 0) in vec3 aPosition;   \n" +
                     "layout(location = 1) in vec4 aColor;      \n" +
-                    "out vec4 vColor;                          \n" +
+                    "flat out vec4 vColor;                          \n" +
                     "void main() {                             \n" +
                     "      gl_Position = uMVPMatrix * vec4(aPosition, 1); \n" +
                     "      vColor = aColor;                       \n" +
@@ -151,7 +152,7 @@ public class TriangleView extends GLSurfaceView {
 
             String fragmentSource = "#version 300 es        \n" +
                     "precision mediump float;               \n" +
-                    "in vec4 vColor;                        \n" +
+                    "flat in vec4 vColor;                        \n" +
                     "out vec4 fragColor;                    \n" +
                     "void main(){                           \n" +
                     "    fragColor = vColor;                \n" +
@@ -175,15 +176,11 @@ public class TriangleView extends GLSurfaceView {
         public void drawSelf() {
                 GLES30.glUseProgram(mProgram);
                 Matrix.setRotateM(mMMatrix, 0, xAngle, 1, 0, 0);
-//                Matrix.translateM(mMMatrix, 0, (float) Math.cos(xAngle ), (float) Math.sin(xAngle ), 0);
-//            Matrix.rotateM(mMMatrix, 0, xAngle , 0, 0, 1);
-
                 GLES30.glUniformMatrix4fv(mUMVPMatrixHandle, 1, false, getFinalMatrix(mMMatrix), 0);
                 GLES30.glVertexAttribPointer(mPositionHandle, 3, GLES30.GL_FLOAT, false, 3 * 4, mVertexBuffer);
                 GLES30.glVertexAttribPointer(mColorHandle, 4, GLES30.GL_FLOAT, false, 4 * 4, mColorBuffer);
                 GLES30.glEnableVertexAttribArray(mPositionHandle);
                 GLES30.glEnableVertexAttribArray(mColorHandle);
-
                 GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, vCount);
 
         }
