@@ -5,6 +5,7 @@ import android.opengl.GLSurfaceView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.glsl_android.R;
+import com.glsl_android.ui.PointsOrLines;
 import com.glsl_android.ui.SixPointedStar;
 import com.glsl_android.ui.TriangleView;
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        mGlSurfaceView = new SixPointedStar(this);
+        mGlSurfaceView = new PointsOrLines(this);
         mGlSurfaceView.requestFocus();
         mGlSurfaceView.setFocusable(true);
         setContentView(mGlSurfaceView);
